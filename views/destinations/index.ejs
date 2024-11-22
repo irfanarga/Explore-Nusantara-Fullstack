@@ -1,0 +1,12 @@
+
+<% layout('layouts/app') %>  
+
+<h1>All Destinations</h1>
+<a href="/destinations/create">Add Destination</a>
+<ul>
+  <% for (const destination of destinations) { %>
+    <li>
+      <a href="/destinations/<%= destination._id %>"><%= destination.name %></a>
+    </li>
+  <% } %>
+</ul>

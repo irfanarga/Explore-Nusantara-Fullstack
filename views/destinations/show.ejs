@@ -1,0 +1,11 @@
+<% layout('layouts/app') %>  
+
+<h1><%= destination.name %></h1>
+<h2><%= destination.location %></h2>
+<img src="<%= destination.image %>" alt="">
+<p><%= destination.description %></p>
+<a href="/destinations/<%= destination._id %>/edit">Edit</a>
+<a href="/destinations">All Destinations</a>
+<form action="/destinations/<%= destination._id %>?_method=DELETE" method="post" style='display: inline!important'>
+  <button type="submit">Delete</button">
+</form>
