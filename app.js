@@ -8,7 +8,7 @@ const methodOverride = require('method-override');
 // Models
 const Destination = require('./models/destination');
 
-mongoose.connect('mongodb://localhost:27017/bestplace')
+mongoose.connect('mongodb://127.0.0.1:27017/bestplace')
   .then((results) => {
     console.log('Connected to database');
   }).catch((err) => {
@@ -81,6 +81,6 @@ app.delete('/destinations/:id', async (req, res) => {
 //   res.send(destination);
 // })
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(5000, () => {
+  console.log('Server is running on port 5000');
 })
