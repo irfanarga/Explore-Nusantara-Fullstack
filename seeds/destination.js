@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Destination = require('../models/destination');
 
 mongoose.connect('mongodb://127.0.0.1:27017/bestplace')
+// mongoose.connect('mongodb://localhost:27017/bestplace')
   .then((results) => {
     console.log('Connected to database');
   }).catch((err) => {
@@ -14,7 +15,8 @@ async function seedDestinations() {
         name: 'Taman Mini Indonesia Indah',
         location: 'Taman Mini Indonesia Indah, Jakarta',
         description: 'Taman hiburan keluarga dengan berbagai replika bangunan dari seluruh Indonesia',
-        image: 'https://source.unsplash.com/collection/2349781/1280x720',
+        // image: 'https://source.unsplash.com/collection/2349781/1280x720',
+        image: 'https://unsplash.com/collections/583204/nature/1280x720',
         phone: 1234567890,
         price: 20000,
       },

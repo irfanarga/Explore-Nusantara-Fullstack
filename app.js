@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const Destination = require('./models/destination');
 
 mongoose.connect('mongodb://127.0.0.1:27017/bestplace')
+// mongoose.connect('mongodb://localhost:27017/bestplace')
   .then((results) => {
     console.log('Connected to database');
   }).catch((err) => {
