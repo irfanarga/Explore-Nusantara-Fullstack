@@ -1,7 +1,7 @@
 <% layout('layouts/app') %>  
 
 <div class="row mb-5">
-  <div class="col-6 offset-3">
+  <div class="col-6">
     <div class="card">
       <img src="<%= destination.image %>" alt="<%= destination.name %>" class='card-img-top'>
       <div class="card-body">
@@ -20,5 +20,36 @@
         </form>
       </div>   
     </div>
+  </div>
+  <div class="col-6">
+    <h3>Leave a review</h3>
+    <form action="/destinations/<%= destination._id %>/reviews" method='POST' class='validated-form mb-3' novalidate>
+      <div class="mb-3">
+        <label for="rating">Rating</label>
+        <input type="range" name='review[rating]' id='rating' min='1' max='5' class='form-range'>
+      </div>
+      <div class="mb-3">
+        <label for="review">Review</label>
+        <textarea name="review[body]" id="body" cols='30' rows='5' class='form-control' required></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please fill out this field.
+        </div>
+      </div>
+      <button type='submit' class='btn btn-success'>Submit</button>
+    </form>
+    <% for (const review of destination.reviews) { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rating: <%= review.rating %></h5>
+          <p class="card-text"><%= review.body %></p>
+          <form action="/destinations/<%= destination._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" style='display: inline!important'>
+            <button class='btn btn-danger btn-sm'>Delete</button>
+          </form>
+        </div>
+      </div>
+    <% } %>
   </div>
 </div>
