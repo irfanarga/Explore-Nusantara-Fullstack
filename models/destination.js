@@ -6,7 +6,7 @@ const destinationSchema = new Schema({
   location: String,
   description: String,
   image: String,
-  phone: Number,
+  phone: String,
   price: Number
 });
 

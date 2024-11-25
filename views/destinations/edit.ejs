@@ -1,18 +1,90 @@
 <% layout('layouts/app') %>  
 
-<h1>Update Destination</h1>
-<form action="/destinations/<%= destination._id %>?_method=PUT" method="post">
-  <div>
-    <label for="name">Name</label>
-    <input type="text" name="destination[name]" id="name" value='<%= destination.name %>'>
-  </div>
-  <div>
-    <label for="location">Location</label>
-    <input type="text" name="destination[location]" id="location" value='<%= destination.location %>'>
-  </div>
-  <div>
-    <label for="price">Price</label>
-    <input type="number" name="destination[price]" id="price" value='<%= destination.price %>'>
-  </div>
-  <button type="submit">Save</button>
-</form>
+<h1 class='text-center'>Edit Destination</h1>
+<div class="col-6 offset-3">
+  <form action="/destinations/<%= destination._id %>?_method=PUT" method="post" class='validated-form' novalidate>
+    <div class='mb-3'>
+      <label for="name" class='form-label'>Name</label>
+      <input type="text" name="destination[name]" id="name" class='form-control' value='<%= destination.name %>' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="location" class='form-label'>Location</label>
+      <input type="text" name="destination[location]" id="location" class='form-control' value='<%= destination.location %>' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="description" class='form-label'>Description</label>
+      <textarea name="destination[description]" id="description" class='form-control' required><%= destination.description %></textarea>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="image" class='form-label'>Image URL</label>
+      <input type="text" name="destination[image]" id="image" class='form-control' value='<%= destination.image %>' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="phone" class='form-label'>Phone Number</label>
+      <input type="text" name="destination[phone]" id="phone" class='form-control' value='<%= destination.phone %>' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="price" class='form-label'>Price</label>
+      <input type="number" name="destination[price]" id="price" class='form-control' value='<%= destination.price %>' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <button type="submit" class='btn btn-success'>Save</button>
+  </form>
+</div>
+
+
+<script>
+  (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.validated-form')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>

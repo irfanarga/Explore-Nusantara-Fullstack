@@ -1,11 +1,24 @@
 <% layout('layouts/app') %>  
 
-<h1><%= destination.location %></h1>
-<h2><%= destination.location %></h2>
-<img src="<%= destination.image %>" alt="">
-<p><%= destination.description %></p>
-<a href="/destinations/<%= destination._id %>/edit">Edit</a>
-<a href="/destinations">All Destinations</a>
-<form action="/destinations/<%= destination._id %>?_method=DELETE" method="post" style='display: inline!important'>
-  <button type="submit">Delete</button">
-</form>
+<div class="row mb-5">
+  <div class="col-6 offset-3">
+    <div class="card">
+      <img src="<%= destination.image %>" alt="<%= destination.name %>" class='card-img-top'>
+      <div class="card-body">
+        <h5 class="card-title"><%= destination.name %></h5>
+        <p class="card-text"><%= destination.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= destination.location %></li>
+        <li class="list-group-item"><%= destination.phone %></li>
+        <li class="list-group-item"><%= destination.price %></li>
+      </ul> 
+      <div class="card-body">
+        <a href="/destinations/<%= destination._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
+        <form action="/destinations/<%= destination._id %>?_method=DELETE" method='POST' style='display: inline!important'>
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>   
+    </div>
+  </div>
+</div>
