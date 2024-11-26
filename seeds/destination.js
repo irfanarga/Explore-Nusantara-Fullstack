@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Destination = require('../models/destination');
+const destination = require('../models/destination');
 
 mongoose.connect('mongodb://127.0.0.1:27017/bestplace')
 // mongoose.connect('mongodb://localhost:27017/bestplace')
@@ -174,8 +175,11 @@ async function seedDestinations() {
     ]
 
     try {
+        const newDestination = destinations.map((destination) => {
+          return {...destination, author: '674577334fa1059dca329de9'}
+        })
         await Destination.deleteMany({});
-        await Destination.insertMany(destinations);
+        await Destination.insertMany(newDestination);
         console.log('Data berhasil disimpan');
     } catch (err) {
         console.log('Terjadi kesalahan saat menyimpan data:', err);

@@ -4,6 +4,8 @@ const wrapAsync = require('../utils/wrapAsync');
 const ErrorHandler = require('../utils/ErrorHandler');
 const express = require('express');
 const isValidObjectId = require('../middlewares/idValidObjectId');
+const isAuth = require('../middlewares/isAuth');
+const { isAuthorDestination } = require('../middlewares/isAuthor');
 
 
 const router = express.Router();
@@ -24,11 +26,11 @@ router.get('/', wrapAsync(async (req, res) => {
   // res.send(destinations);
 }))
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
   res.render('destinations/create');
 })
 
-router.post('/', validateDestination, wrapAsync(async (req, res, next) => {
+router.post('/', isAuth, validateDestination, wrapAsync(async (req, res, next) => {
   const destination = new Destination(req.body.destination);
   await destination.save();
   req.flash('success_msg', 'Successfully add a new destination!');
@@ -37,24 +39,24 @@ router.post('/', validateDestination, wrapAsync(async (req, res, next) => {
 
 router.get('/:id', isValidObjectId('/destinations'), wrapAsync(async (req, res) => {
   const { id } = req.params;
-  const destination = await Destination.findById(id).populate('reviews');
+  const destination = await Destination.findById(id).populate('reviews').populate('author');
   res.render('destinations/show', { destination });
 }))
 
-router.get('/:id/edit', isValidObjectId('/destinations'), wrapAsync(async (req, res) => {
+router.get('/:id/edit', isAuth, isAuthorDestination, isValidObjectId('/destinations'), wrapAsync(async (req, res) => {
   const { id } = req.params;
   const destination = await Destination.findById(id);
   res.render('destinations/edit', { destination });
 }))
 
-router.put('/:id', isValidObjectId('/destinations'), validateDestination, wrapAsync(async (req, res) => {
+router.put('/:id', isAuth, isAuthorDestination, isValidObjectId('/destinations'), validateDestination, wrapAsync(async (req, res) => {
   const { id } = req.params;
   await Destination.findByIdAndUpdate(id, { ...req.body.destination })
   req.flash('success_msg', 'Successfully update destination!');
   res.redirect(`/destinations/${id}`);
 }))
 
-router.delete('/:id', isValidObjectId('/destinations'), wrapAsync(async (req, res) => {
+router.delete('/:id', isAuth, isAuthorDestination, isValidObjectId('/destinations'), wrapAsync(async (req, res) => {
   const { id } = req.params;
   await Destination.findByIdAndDelete(id);
   req.flash('success_msg', 'Successfully delete destination!');

@@ -9,6 +9,10 @@ const destinationSchema = new Schema({
   image: String,
   phone: String,
   price: Number,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
