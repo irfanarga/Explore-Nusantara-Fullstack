@@ -3,7 +3,7 @@ const destinationSchema = require('../schemas/destination');
 const wrapAsync = require('../utils/wrapAsync');
 const ErrorHandler = require('../utils/ErrorHandler');
 const express = require('express');
-const isValidObjectId = require('../middleware/idValidObjectId');
+const isValidObjectId = require('../middlewares/idValidObjectId');
 
 
 const router = express.Router();

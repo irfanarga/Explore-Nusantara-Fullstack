@@ -2,11 +2,17 @@ const ejsMate = require('ejs-mate');
 const express = require('express');
 const path = require('path');
 const app = express();
+// npm i express-session
 const session = require('express-session');
+// npm i connect-flash
 const flash = require('connect-flash');
 const ErrorHandler = require('./utils/ErrorHandler');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+// npm install passport passport-local-mongoose
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/bestplace')
@@ -36,6 +42,11 @@ app.use(session({
   }
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -46,6 +57,7 @@ app.get('/', (req, res) => {
   res.render('home');
 })
 
+app.use('/', require('./routes/auth'));
 app.use('/destinations', require('./routes/destinations'));
 app.use('/destinations/:destination_id/reviews', require('./routes/reviews'));
 

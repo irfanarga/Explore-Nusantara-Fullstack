@@ -1,6 +1,6 @@
 const Review = require('../models/review');
 const reviewSchema = require('../schemas/review');
-const isValidObjectId = require('../middleware/idValidObjectId');
+const isValidObjectId = require('../middlewares/idValidObjectId');
 const express = require('express');
 const Destination = require('../models/destination');
 const wrapAsync = require('../utils/wrapAsync');
