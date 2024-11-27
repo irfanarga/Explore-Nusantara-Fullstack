@@ -176,7 +176,10 @@ async function seedDestinations() {
 
     try {
         const newDestination = destinations.map((destination) => {
-          return {...destination, author: '674577334fa1059dca329de9'}
+          return {...destination, author: '674696f6fb03e08916259bdb', images: {
+            url: "public\\images\\image-1732697708466-495600214.jpg",
+            filename: "image-1732697708466-495600214.jpg"
+          }}
         })
         await Destination.deleteMany({});
         await Destination.insertMany(newDestination);

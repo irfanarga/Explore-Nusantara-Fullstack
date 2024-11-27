@@ -1,17 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Review = require('./review');
 
 const destinationSchema = new Schema({
   name: String,
   location: String,
-  description: String,
-  images: [
-    {
-      url: String,
-      filename: String
-    }
-  ],
+  descriptionName: String,
+  imageName: String,
   phone: String,
   price: Number,
   author: {
