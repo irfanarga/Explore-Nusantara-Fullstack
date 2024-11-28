@@ -179,7 +179,7 @@ async function seedDestinations() {
           return {...destination, author: '674696f6fb03e08916259bdb', images: {
             url: "public\\images\\image-1732697708466-495600214.jpg",
             filename: "image-1732697708466-495600214.jpg"
-          }}
+          }, city: "Solo"}
         })
         await Destination.deleteMany({});
         await Destination.insertMany(newDestination);

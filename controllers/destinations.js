@@ -4,8 +4,8 @@ const ExpressError = require('../utils/ErrorHandler');
 
 module.exports.index = async (req, res) => {
   const destinations = await Destination.find();
-  // res.render('destinations/index', { destinations });
-  res.send(destinations);
+  res.render('destinations/index', { destinations });
+  // res.status(200).json({message: 'success', data: { destinations }});
 }
 
 module.exports.store = async (req, res, next) => {
@@ -24,8 +24,8 @@ module.exports.store = async (req, res, next) => {
 module.exports.show = async (req, res) => {
   const { id } = req.params;
   const destination = await Destination.findById(id).populate('reviews').populate('author');
-  // res.render('destinations/show', { destination });
-  res.send(destination);
+  res.render('destinations/show', { destination });
+  // res.status(200).json({message: 'success', data: { destination }});
 }
 
 module.exports.edit = async (req, res) => {

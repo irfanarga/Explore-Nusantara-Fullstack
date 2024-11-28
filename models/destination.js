@@ -6,6 +6,7 @@ const destinationSchema = new Schema({
   name: String,
   location: String,
   description: String,
+  city: String,
   images: [
     {
       url: String,
