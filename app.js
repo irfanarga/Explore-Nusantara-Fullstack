@@ -61,6 +61,8 @@ app.get('/', (req, res) => {
 app.use('/', require('./routes/auth'));
 app.use('/destinations', require('./routes/destinations'));
 app.use('/destinations/:destination_id/reviews', require('./routes/reviews'));
+app.use('/localpreneurs', require('./routes/localpreneurs'));
+app.use('/localpreneurs/:localpreneur_id/localpreneurreviews', require('./routes/localpreneurReviews'));
 
 app.all('*', (req, res, next) => {
   next(new ErrorHandler('Page Not Found', 404))

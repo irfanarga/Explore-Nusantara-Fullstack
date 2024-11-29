@@ -1,7 +1,7 @@
 const joi = require('joi');
 
 const localpreneurSchema = joi.object({
-  destination: joi.object({
+  localpreneur: joi.object({
     name: joi.string().required(),
     location: joi.string().required(),
     description: joi.string().required(),

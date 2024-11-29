@@ -1,0 +1,24 @@
+
+<% layout('layouts/app') %>  
+
+<h1>All Localpreneurs</h1>
+
+<% for (const localpreneur of localpreneurs) { %>
+    <div class="card mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="/images/<%= localpreneur.images[0].filename %>" alt="<%= localpreneur.name %>" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= localpreneur.name %></h5>
+            <p class="card-text"><%= localpreneur.description %></p>
+            <p class="card-text">
+              <small class="text-secondary"><%= localpreneur.location %></small>
+            </p>
+            <a href="/localpreneurs/<%= localpreneur._id %>" class="btn btn-primary">View <%= localpreneur.name %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+<% } %>

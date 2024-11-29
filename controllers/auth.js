@@ -14,7 +14,7 @@ module.exports.store = async (req, res) => {
         return next(err);
       }
       req.flash('success_msg', 'Successfully register and logged in!');
-      res.redirect('/destinations');
+      res.redirect('/');
     })
   } catch (error) {
     req.flash('error_msg', error.message);
@@ -28,7 +28,7 @@ module.exports.loginForm = (req, res) => {
 
 module.exports.login = (req, res) => {
   req.flash('success_msg', 'Successfully login!');
-  res.redirect('/destinations');
+  res.redirect('/');
 }
 
 module.exports.logout = (req, res) => {

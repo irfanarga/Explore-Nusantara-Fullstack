@@ -3,8 +3,8 @@ const fs = require('fs');
 const ExpressError = require('../utils/ErrorHandler');
 
 module.exports.index = async (req, res) => {
-  const localpreneur = await Localpreneur.find();
-  res.render('localpreneurs/index', { localpreneur });
+  const localpreneurs = await Localpreneur.find();
+  res.render('localpreneurs/index', { localpreneurs });
   // res.status(200).json({message: 'success', data: { localpreneur }});
 }
 
@@ -30,15 +30,15 @@ module.exports.show = async (req, res) => {
 
 module.exports.edit = async (req, res) => {
   const { id } = req.params;
-  const destination = await Destination.findById(id);
-  res.render('destinations/edit', { destination });
+  const localpreneur = await Localpreneur.findById(id);
+  res.render('localpreneurs/edit', { localpreneur });
 }
 
 module.exports.update = async (req, res) => {
   const { id } = req.params;
-  const destination = await Destination.findByIdAndUpdate(id, { ...req.body.destination })
+  const localpreneur = await Localpreneur.findByIdAndUpdate(id, { ...req.body.localpreneur })
   if (req.files && req.files.length > 0) {
-    destination.images.forEach(image => {
+    localpreneur.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
     })
 
@@ -46,26 +46,26 @@ module.exports.update = async (req, res) => {
       url: file.path,
       filename: file.filename
     }))
-    destination.images = images;
-    await destination.save();
+    localpreneur.images = images;
+    await localpreneur.save();
   }
-  req.flash('success_msg', 'Successfully update destination!');
-  res.redirect(`/destinations/${id}`);
+  req.flash('success_msg', 'Successfully update localpreneur!');
+  res.redirect(`/localpreneurs/${id}`);
 }
 
 module.exports.destroy = async (req, res) => {
   const { id } = req.params;
-  const destination = await Destination.findById(id);
-  if (destination.images.length > 0) {
-    destination.images.forEach(image => {
+  const localpreneur = await Localpreneur.findById(id);
+  if (localpreneur.images.length > 0) {
+    localpreneur.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
     })
   }
 
-  await destination.deleteOne();
+  await localpreneur.deleteOne();
 
-  req.flash('success_msg', 'Successfully delete destination!');
-  res.redirect('/destinations');
+  req.flash('success_msg', 'Successfully delete localpreneur!');
+  res.redirect('/localpreneurs');
 }
 
 module.exports.destroyImage = async (req, res) => {
@@ -75,20 +75,20 @@ module.exports.destroyImage = async (req, res) => {
     
     if (!images && images.length === 0) {
       req.flash('error_msg', 'Please select at least 1 image!');
-      return res.redirect(`/destinations/${id}/edit`);
+      return res.redirect(`/localpreneurs/${id}/edit`);
     }
 
     images.forEach(image => {
       fs.unlinkSync(image, err => new ExpressError(err));
     })
 
-    await Destination.findByIdAndUpdate(id, { $pull: { images: { url: { $in: images } } } });
+    await Localpreneur.findByIdAndUpdate(id, { $pull: { images: { url: { $in: images } } } });
 
     req.flash('success_msg', 'Successfully delete image!');
-    res.redirect(`/destinations/${id}/edit`);
+    res.redirect(`/localpreneurs/${id}/edit`);
 
   } catch (error) {
     req.flash('error_msg', error.message);
-    res.redirect(`/destinations/${id}/edit`);
+    res.redirect(`/localpreneurs/${id}/edit`);
   }
 }

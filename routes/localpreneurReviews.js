@@ -1,0 +1,14 @@
+const localpreneurReviewController = require('../controllers/localpreneurReviews');
+const isValidObjectId = require('../middlewares/idValidObjectId');
+const express = require('express');
+const wrapAsync = require('../utils/wrapAsync');
+const isAuth = require('../middlewares/isAuth');
+const { validateLocalpreneurReview } = require('../middlewares/validator');
+
+const router = express.Router({mergeParams: true});
+
+router.post('/', isAuth, isValidObjectId('/localpreneurs'), validateLocalpreneurReview, wrapAsync(localpreneurReviewController.store));
+
+router.delete('/:localpreneurReview_id', isAuth, isValidObjectId('/localpreneurs'), wrapAsync(localpreneurReviewController.destroy));
+
+module.exports = router;

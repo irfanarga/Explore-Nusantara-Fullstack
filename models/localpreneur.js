@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const localpreneurReview = require('./localpreneurReview');
+const LocalpreneurReview = require('./localpreneurReview');
 
 const localpreneurSchema = new Schema({
   name: String,
@@ -22,14 +22,14 @@ const localpreneurSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'localpreneurReview'
+      ref: 'LocalpreneurReview'
     }
   ]
 });
 
 localpreneurSchema.post('findOneAndDelete', async function (doc) {
   if (doc) {
-    await localpreneurReview.deleteMany({ _id: { $in: doc.reviews } })
+    await LocalpreneurReview.deleteMany({ _id: { $in: doc.reviews } })
   }
 })
 
