@@ -1,0 +1,88 @@
+<% layout('layouts/app') %>  
+
+<h1 class='text-center'>Add Event</h1>
+<div class="col-6 offset-3">
+  <form action="/events" method="post" class='validated-form' novalidate enctype="multipart/form-data">
+    <div class='mb-3'>
+      <label for="name" class='form-label'>Name</label>
+      <input type="text" name="event[name]" id="name" class='form-control' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="date" class='form-label'>Date</label>
+      <input type="date" name="event[date]" id="date" class='form-control' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="location" class='form-label'>Location</label>
+      <input type="text" name="event[location]" id="location" class='form-control' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="description" class='form-label'>Description</label>
+      <textarea name="event[description]" id="description" class='form-control' required></textarea>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="city" class='form-label'>City</label>
+      <input type="text" name="event[city]" id="city" class='form-control' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="phone" class='form-label'>Phone Number</label>
+      <input type="text" name="event[phone]" id="phone" class='form-control' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="price" class='form-label'>Price</label>
+      <input type="number" name="event[price]" id="price" class='form-control' required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <div class='mb-3'>
+      <label for="image" class='form-label'>Image</label>
+      <input type="file" name="image" id="image" accept="image/*" class="form-control" multiple required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please fill out this field.
+      </div>
+    </div>
+    <button type="submit" class='btn btn-success'>Save</button>
+  </form>
+</div>

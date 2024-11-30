@@ -1,6 +1,6 @@
 <% layout('layouts/app') %>  
 
-<h1 class='text-center'>Edit localpreneur</h1>
+<h1 class='text-center'>Edit Localpreneurs</h1>
 <div class="row mb-5">
   <div class="col-6" <%= !localpreneur.images.length > 0 ? 'offset-3' : '' %>>
     <form action="/localpreneurs/<%= localpreneur._id %>?_method=PUT" method="post" class='validated-form' novalidate enctype="multipart/form-data">

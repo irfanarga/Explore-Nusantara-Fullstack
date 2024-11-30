@@ -33,7 +33,7 @@
         <li class="list-group-item"><%= localpreneur.phone %></li>
         <li class="list-group-item"><%= localpreneur.price %></li>
       </ul> 
-      <% if (currentUser && localpreneur.author.equals(currentUser._id)) { %>
+      <% if ((currentUser && localpreneur.author.equals(currentUser._id)) || currentUser.role === 'admin') { %>
       <div class="card-body">
         <a href="/localpreneurs/<%= localpreneur._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
         <form action="/localpreneurs/<%= localpreneur._id %>?_method=DELETE" method='POST' style='display: inline!important'>

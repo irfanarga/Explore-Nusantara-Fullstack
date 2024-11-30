@@ -1,0 +1,78 @@
+<% layout('layouts/app') %>  
+
+<div class="row mb-5">
+  <div class="col-6">
+    <div class="card">
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <% event.images.forEach((image, index) => { %>
+          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+            <img src="/images/<%= image.filename %>" class="d-block w-100" alt="<%= event.name %>">
+          </div>
+          <% }) %>
+        </div>
+        <% if (event.images.length > 1) { %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% } %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= event.name %></h5>
+        <p class="card-text"><%= event.date.toLocaleDateString('id') %></p>
+        <p class="card-text"><%= event.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= event.location %></li>
+        <li class="list-group-item"><%= event.city %></li>
+        <li class="list-group-item">Author: <%= event.author.username %></li>
+        <li class="list-group-item"><%= event.phone %></li>
+        <li class="list-group-item"><%= event.price %></li>
+      </ul> 
+      <% if ((currentUser && event.author.equals(currentUser._id)) || currentUser.role === 'admin') { %>
+      <div class="card-body">
+        <a href="/events/<%= event._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
+        <form action="/events/<%= event._id %>?_method=DELETE" method='POST' style='display: inline!important'>
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div> 
+      <% } %>  
+    </div>
+  </div>
+  <div class="col-6">
+    <h3>Leave a review</h3>
+    <form action="/events/<%= event._id %>/eventreviews" method='POST' class='validated-form mb-3' novalidate>
+      <div class="mb-3">
+        <label for="rating">Rating</label>
+        <input type="range" name='eventReview[rating]' id='rating' min='1' max='5' class='form-range'>
+      </div>
+      <div class="mb-3">
+        <label for="review">Review</label>
+        <textarea name="eventReview[body]" id="body" cols='30' rows='5' class='form-control' required></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please fill out this field.
+        </div>
+      </div>
+      <button type='submit' class='btn btn-success'>Submit</button>
+    </form>
+    <% for (const review of event.reviews) { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rating: <%= review.rating %></h5>
+          <p class="card-text"><%= review.body %></p>
+          <form action="/events/<%= event._id %>/eventreviews/<%= review._id %>?_method=DELETE" method="POST" style='display: inline!important'>
+            <button class='btn btn-danger btn-sm'>Delete</button>
+          </form>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

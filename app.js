@@ -12,6 +12,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const cors = require('cors');
 // npm install passport passport-local-mongoose
 
 
@@ -28,6 +29,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // middlewares
+app.use(cors({
+  origin: ['*']
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -63,6 +67,8 @@ app.use('/destinations', require('./routes/destinations'));
 app.use('/destinations/:destination_id/reviews', require('./routes/reviews'));
 app.use('/localpreneurs', require('./routes/localpreneurs'));
 app.use('/localpreneurs/:localpreneur_id/localpreneurreviews', require('./routes/localpreneurReviews'));
+app.use('/events', require('./routes/events'));
+app.use('/events/:event_id/eventreviews', require('./routes/eventReviews'));
 
 app.all('*', (req, res, next) => {
   next(new ErrorHandler('Page Not Found', 404))

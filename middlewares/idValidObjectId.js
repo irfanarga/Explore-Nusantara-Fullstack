@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = (redirectUrl = '/') => {
   return async (req, res, next) => {
-    const paramId = ['id', 'destination_id', 'review_id', 'localpreneur_id', 'localpreneurReview_id'].find(param => req.params[param]);
+    const paramId = ['id', 'destination_id', 'review_id', 'localpreneur_id', 'localpreneurReview_id', 'event_id', 'eventReview_id'].find(param => req.params[param]);
 
     if (!paramId) {
       return next();
