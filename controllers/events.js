@@ -5,7 +5,7 @@ const ExpressError = require('../utils/ErrorHandler');
 module.exports.index = async (req, res) => {
   const events = await Event.find();
   // res.render('events/index', { events });
-  res.status(200).json({message: 'success', data: { localpreneur }});
+  res.status(200).json({message: 'success', data: { events }});
 }
 
 module.exports.store = async (req, res, next) => {
