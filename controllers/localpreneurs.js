@@ -24,7 +24,7 @@ module.exports.store = async (req, res, next) => {
 
 module.exports.show = async (req, res) => {
   const { id } = req.params;
-  const localpreneur = await Localpreneur.findById(id).populate('reviews');//.populate('author');
+  const localpreneur = await Localpreneur.findById(id).populate('reviews').populate('author');
   // res.render('localpreneurs/show', { localpreneur });
   res.status(200).json({message: 'success', data: { localpreneur }});
 }
