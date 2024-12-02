@@ -8,8 +8,8 @@ module.exports.store = async (req, res) => {
   await eventReview.save();
   await event.save();
   req.flash('success_msg', 'Successfully add Event Review!');
-  res.redirect(`/events/${req.params.event_id}`);
-  // res.send({message: 'success', data: { eventReview }});
+  // res.redirect(`/events/${req.params.event_id}`);
+  res.send({message: 'success', data: { eventReview }});
 }
 
 module.exports.destroy = async (req, res) => {
@@ -17,5 +17,6 @@ module.exports.destroy = async (req, res) => {
   await Event.findByIdAndUpdate(event_id, { $pull: { reviews: eventReview_id } });
   await EventReview.findByIdAndDelete(eventReview_id);
   req.flash('success_msg', 'Successfully delete Event Review!');
-  res.redirect(`/events/${event_id}`);
+  // res.redirect(`/events/${event_id}`);
+  res.send({message: 'success'});
 }

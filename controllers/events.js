@@ -4,8 +4,8 @@ const ExpressError = require('../utils/ErrorHandler');
 
 module.exports.index = async (req, res) => {
   const events = await Event.find();
-  res.render('events/index', { events });
-  // res.status(200).json({message: 'success', data: { localpreneur }});
+  // res.render('events/index', { events });
+  res.status(200).json({message: 'success', data: { localpreneur }});
 }
 
 module.exports.store = async (req, res, next) => {
@@ -18,20 +18,22 @@ module.exports.store = async (req, res, next) => {
   event.images = images;
   await event.save();
   req.flash('success_msg', 'Successfully add a new event!');
-  res.redirect(`/events`);
+  // res.redirect(`/events`);
+  res.status(200).json({message: 'success', data: { event }});
 }
 
 module.exports.show = async (req, res) => {
   const { id } = req.params;
   const event = await Event.findById(id).populate('reviews').populate('author');
-  res.render('events/show', { event });
-  // res.status(200).json({message: 'success', data: { event }});
+  // res.render('events/show', { event });
+  res.status(200).json({message: 'success', data: { event }});
 }
 
 module.exports.edit = async (req, res) => {
   const { id } = req.params;
   const event = await Event.findById(id);
-  res.render('events/edit', { event });
+  // res.render('events/edit', { event });
+  res.status(200).json({message: 'success', data: { event }});
 }
 
 module.exports.update = async (req, res) => {
@@ -50,7 +52,8 @@ module.exports.update = async (req, res) => {
     await event.save();
   }
   req.flash('success_msg', 'Successfully update event!');
-  res.redirect(`/events/${id}`);
+  // res.redirect(`/events/${id}`);
+  res.status(200).json({message: 'success', data: { event }});
 }
 
 module.exports.destroy = async (req, res) => {
@@ -65,7 +68,8 @@ module.exports.destroy = async (req, res) => {
   await event.deleteOne();
 
   req.flash('success_msg', 'Successfully delete event!');
-  res.redirect('/events');
+  // res.redirect('/events');
+  res.status(200).json({message: 'success', data: { event }});
 }
 
 module.exports.destroyImage = async (req, res) => {
@@ -75,7 +79,7 @@ module.exports.destroyImage = async (req, res) => {
     
     if (!images && images.length === 0) {
       req.flash('error_msg', 'Please select at least 1 image!');
-      return res.redirect(`/events/${id}/edit`);
+      // return res.redirect(`/events/${id}/edit`);
     }
 
     images.forEach(image => {
@@ -85,10 +89,10 @@ module.exports.destroyImage = async (req, res) => {
     await Event.findByIdAndUpdate(id, { $pull: { images: { url: { $in: images } } } });
 
     req.flash('success_msg', 'Successfully delete image!');
-    res.redirect(`/events/${id}/edit`);
+    // res.redirect(`/events/${id}/edit`);
 
   } catch (error) {
     req.flash('error_msg', error.message);
-    res.redirect(`/events/${id}/edit`);
+    // res.redirect(`/events/${id}/edit`);
   }
 }

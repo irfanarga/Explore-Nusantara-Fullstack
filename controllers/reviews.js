@@ -8,7 +8,8 @@ module.exports.store = async (req, res) => {
   await review.save();
   await destination.save();
   req.flash('success_msg', 'Successfully add review!');
-  res.redirect(`/destinations/${req.params.destination_id}`);
+  // res.redirect(`/destinations/${req.params.destination_id}`);
+  res.send({message: 'success', data: { review }});
 }
 
 module.exports.destroy = async (req, res) => {
@@ -16,5 +17,6 @@ module.exports.destroy = async (req, res) => {
   await Destination.findByIdAndUpdate(destination_id, { $pull: { reviews: review_id } });
   await Review.findByIdAndDelete(review_id);
   req.flash('success_msg', 'Successfully delete review!');
-  res.redirect(`/destinations/${destination_id}`);
+  // res.redirect(`/destinations/${destination_id}`);
+  res.send({message: 'success'});
 }
