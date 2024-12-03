@@ -1,6 +1,12 @@
 const LocalpreneurReview = require('../models/localpreneurReview');
 const Localpreneur = require('../models/localpreneur');
 
+module.exports.index = async (req, res) => {
+  const localpreneurReviews = await LocalpreneurReview.find();
+  // res.render('localpreneurs/index', { localpreneurReviews });
+  res.status(200).json({message: 'success', data: { localpreneurReviews }});
+}
+
 module.exports.store = async (req, res) => {
   const localpreneurReview = new LocalpreneurReview(req.body.localpreneurReview);
   const localpreneur = await Localpreneur.findById(req.params.localpreneur_id);
@@ -8,8 +14,8 @@ module.exports.store = async (req, res) => {
   await localpreneurReview.save();
   await localpreneur.save();
   req.flash('success_msg', 'Successfully add Localpreneur Review!');
-  // res.redirect(`/localpreneurs/${req.params.localpreneur_id}`);
-  res.send({message: 'success', data: { localpreneurReview }});
+  res.redirect(`/localpreneurs/${req.params.localpreneur_id}`);
+  // res.send({message: 'success', data: { localpreneurReview }});
 }
 
 module.exports.destroy = async (req, res) => {
@@ -17,6 +23,6 @@ module.exports.destroy = async (req, res) => {
   await Localpreneur.findByIdAndUpdate(localpreneur_id, { $pull: { reviews: localpreneurReview_id } });
   await LocalpreneurReview.findByIdAndDelete(localpreneurReview_id);
   req.flash('success_msg', 'Successfully delete Localpreneur Review!');
-  // res.redirect(`/localpreneurs/${localpreneur_id}`);
-  res.send({message: 'success'});
+  res.redirect(`/localpreneurs/${localpreneur_id}`);
+  // res.send({message: 'success'});
 }

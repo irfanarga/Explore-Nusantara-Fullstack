@@ -7,7 +7,9 @@ const { validateLocalpreneurReview } = require('../middlewares/validator');
 
 const router = express.Router({mergeParams: true});
 
-router.post('/', isAuth, isValidObjectId('/localpreneurs'), validateLocalpreneurReview, wrapAsync(localpreneurReviewController.store));
+router.route('/')
+.get(wrapAsync(localpreneurReviewController.index))
+.post(isAuth, isValidObjectId('/localpreneurs'), validateLocalpreneurReview, wrapAsync(localpreneurReviewController.store));
 
 router.delete('/:localpreneurReview_id', isAuth, isValidObjectId('/localpreneurs'), wrapAsync(localpreneurReviewController.destroy));
 

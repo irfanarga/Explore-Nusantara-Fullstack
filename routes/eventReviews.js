@@ -7,7 +7,9 @@ const { validateEventReview } = require('../middlewares/validator');
 
 const router = express.Router({mergeParams: true});
 
-router.post('/', isAuth, isValidObjectId('/events'), validateEventReview, wrapAsync(eventReviewController.store));
+router.route('/')
+.get(wrapAsync(eventReviewController.index))
+.post(isAuth, isValidObjectId('/events'), validateEventReview, wrapAsync(eventReviewController.store));
 
 router.delete('/:eventReview_id', isAuth, isValidObjectId('/events'), wrapAsync(eventReviewController.destroy));
 
