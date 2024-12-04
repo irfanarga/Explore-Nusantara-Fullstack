@@ -7,7 +7,7 @@
         <div class="carousel-inner">
           <% destination.images.forEach((image, index) => { %>
           <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-            <img src="/images/<%= image.filename %>" class="d-block w-100" alt="<%= destination.name %>">
+            <img src="/images/<%= image.filename %>" class="block w-full h-auto" alt="<%= destination.name %>">
           </div>
           <% }) %>
         </div>
