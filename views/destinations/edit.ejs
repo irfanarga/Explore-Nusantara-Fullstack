@@ -48,11 +48,11 @@
             <input type="checkbox" id="checkAll" class="form-check-input">
             <label for="checkAll" class="form-check-label">Check All</label>
           </div>
-          <form action="/destinations/<%= destination._id %>/images?_method=DELETE" method="POST" class="d-flex flex-wrap">
-            <% destination.images.forEach((image, index) => { %>
-              <div class="col-md-4">
-                <div class="card-mb-3">
-                  <div class='w-full h-80'></div>
+          <div class='w-full h-80'></div>
+            <form action="/destinations/<%= destination._id %>/images?_method=DELETE" method="POST" class="d-flex flex-wrap">
+              <% destination.images.forEach((image, index) => { %>
+                <div class="col-md-4">
+                  <div class="card-mb-3">
                     <img src="/images/<%= image.filename %>" alt="<% destination.name %>" class="object-contain w-full h-full">
                     <div class="card-body">
                       <label class="custom-checkbox">
@@ -62,11 +62,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            <% }) %>
-            <div class="w-100"></div>
-            <button class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Delete</button>
-          </form>
+              <% }) %>
+              <div class="w-100"></div>
+              <button class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Delete</button>
+            </form>
+          </div>
         </div>
         <% } %>
     </div>
