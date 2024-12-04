@@ -1,47 +1,38 @@
 <% layout('layouts/app') %>  
 
-<div class="row mb-5">
-  <div class="col-6">
-    <div class="card">
-      <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-          <% destination.images.forEach((image, index) => { %>
-          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-            <img src="/images/<%= image.filename %>" class="d-block w-100" alt="<%= destination.name %>">
+<div class="bg-white rounded-lg shadow-md mb-8">
+  <div class="p-6 border-b">
+      <h2 class="text-xl font-bold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Destination
+      </h2>
+  </div>
+  <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-lg overflow-hidden shadow">
+              <img src="/images/<%= destination.images[0].filename %>" alt="<%= destination.name %>" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="font-bold text-lg mb-2"><%= destination.name %></h3>
+                  <p class="text-gray-600"><%= destination.description %></p>
+                  <p class="text-gray-600"><%= destination.location %></p>
+                  <p class="text-gray-600"><%= destination.city %></p>
+                  <p class="text-gray-600"><%= destination.author.username %></p>
+                  <p class="text-gray-600"><%= destination.description %></p>
+                  <p class="text-gray-600"><%= destination.price %></p>
+              </div>
+              <% if ((currentUser && destination.author.equals(currentUser._id))) { %>
+              <div class="card-body">
+                <a href="/destinations/<%= destination._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
+                <form action="/destinations/<%= destination._id %>?_method=DELETE" method='POST' style='display: inline!important'>
+                  <button class="btn btn-danger">Delete</button>
+                </form>
+              </div> 
+              <% } %>
           </div>
-          <% }) %>
-        </div>
-        <% if (destination.images.length > 1) { %>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-        <% } %>
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= destination.name %></h5>
-        <p class="card-text"><%= destination.description %></p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><%= destination.location %></li>
-        <li class="list-group-item"><%= destination.city %></li>
-        <li class="list-group-item">Author: <%= destination.author.username %></li>
-        <li class="list-group-item"><%= destination.phone %></li>
-        <li class="list-group-item"><%= destination.price %></li>
-      </ul> 
-      <% if ((currentUser && destination.author.equals(currentUser._id)) || currentUser._id.equals('674d5a2e28e70efaf4e1fc2c')) { %>
-      <div class="card-body">
-        <a href="/destinations/<%= destination._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
-        <form action="/destinations/<%= destination._id %>?_method=DELETE" method='POST' style='display: inline!important'>
-          <button class="btn btn-danger">Delete</button>
-        </form>
-      </div> 
-      <% } %>
-    </div>
   </div>
   <div class="col-6">
     <h3>Leave a review</h3>
@@ -53,12 +44,6 @@
       <div class="mb-3">
         <label for="review">Review</label>
         <textarea name="review[body]" id="body" cols='30' rows='5' class='form-control' required></textarea>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
       </div>
       <button type='submit' class='btn btn-success'>Submit</button>
     </form>
