@@ -50,10 +50,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
-  res.locals.userRole = req.user.role;
   res.locals.currentUser = req.user;
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
+  res.locals.userRole = req.user.role;
   next();
 })
 
