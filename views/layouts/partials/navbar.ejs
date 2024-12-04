@@ -1,8 +1,8 @@
-<nav class="bg-blue-600 sticky top-0 shadow-md">
+<nav class="bg-blue-600 sticky top-0 shadow-lg">
   <div class="container mx-auto px-4 py-2 flex items-center justify-between">
     <a class="text-white text-lg font-bold" href="/">Explore Nusantara</a>
     <button
-      class="text-white md:hidden focus:outline-none"
+      class="text-white lg:hidden focus:outline-none"
       type="button"
       aria-expanded="false"
       aria-controls="navbarNav"
@@ -11,8 +11,8 @@
     >
       <span class="material-icons">Menu</span>
     </button>
-    <div class="hidden w-full lg:flex md:items-center md:w-auto" id="navbarNav">
-      <ul class="flex flex-col lg:flex-row md:space-x-4">
+    <div class="hidden w-full lg:flex lg:items-center lg:w-auto" id="navbarNav">
+      <ul class="flex flex-col lg:flex-row lg:space-x-4">
         <li>
           <a class="text-white hover:underline px-2 py-1" href="/">Home</a>
         </li>
@@ -57,7 +57,7 @@
           >
         </li>
       </ul>
-      <ul class="flex flex-col lg:flex-row md:space-x-4 ml-auto mt-4 md:mt-0">
+      <ul class="flex flex-col lg:flex-row lg:space-x-4 ml-auto mt-4 lg:mt-0">
         <% if (!currentUser) { %>
         <li>
           <a class="text-white hover:underline px-2 py-1" href="/login"
