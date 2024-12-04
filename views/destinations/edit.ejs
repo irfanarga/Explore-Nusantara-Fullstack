@@ -14,7 +14,7 @@
       </div>
       <div class='mb-3'>
         <label for="description" class='block text-sm font-medium text-gray-700'>Description</label>
-        <textarea name="destination[description]" id="description" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= destination.description %>' required></textarea>
+        <textarea name="destination[description]" id="description" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' required><%= destination.description %></textarea>
       </div>
       <div class='mb-3'>
         <label for="city" class='block text-sm font-medium text-gray-700'>City</label>
@@ -36,7 +36,7 @@
     </form>
   </div>
   <% if (destination.images.length > 0) { %>
-  <div class="col-6">
+  <div class="p-4">
     <h5 class="text-center">Delete Image</h5>
     <div class="form-group form-check">
       <input type="checkbox" id="checkAll" class="form-check-input">
