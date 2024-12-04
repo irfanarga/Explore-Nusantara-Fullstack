@@ -1,0 +1,84 @@
+<% layout('layouts/app') %>  
+
+<h1 class="text-center text-2xl font-bold text-gray-800 mb-6">Edit Localpreneur</h1> 
+<div class='grid grid-cols-2 gap-6'>
+  <div class='p-4'>
+    <div class="bg-white rounded-lg shadow-md mb-8">
+      <div class='p-4'>
+        <form action="/localpreneurs/<%= localpreneur._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+          <div class='mb-3'>
+            <label for="name" class='block text-sm font-medium text-gray-700'>Name</label>
+            <input type="text" name="localpreneur[name]" id="name" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= localpreneur.name %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="location" class='block text-sm font-medium text-gray-700'>Location</label>
+            <input type="text" name="localpreneur[location]" id="location" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= localpreneur.location %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="description" class='block text-sm font-medium text-gray-700'>Description</label>
+            <textarea name="localpreneur[description]" id="description" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' required><%= localpreneur.description %></textarea>
+          </div>
+          <div class='mb-3'>
+            <label for="city" class='block text-sm font-medium text-gray-700'>City</label>
+            <input type="text" name="localpreneur[city]" id="city" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= localpreneur.city %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="phone" class='block text-sm font-medium text-gray-700'>Phone Number</label>
+            <input type="text" name="localpreneur[phone]" id="phone" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= localpreneur.phone %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="price" class='block text-sm font-medium text-gray-700'>Price</label>
+            <input type="number" name="localpreneur[price]" id="price" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= localpreneur.price %>' required>
+          </div>
+          <div class='mb-6'>
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image" accept="image/*" multiple>
+          </div>
+          <button type='submit' class='px-4 py-2 bg-green-500 text-white font-semibold rounded-md text-sm whitespace-nowrap'>Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class='p-4'>
+    <div class="bg-white rounded-lg shadow-md mb-8">
+      <% if (localpreneur.images.length > 0) { %>
+        <div class="p-4">
+          <h5 class="text-center">Delete Image</h5>
+          <hr class="my-4 border-gray-900">
+          <div class="form-group form-check mb-4">
+            <input type="checkbox" id="checkAll" class="form-check-input">
+            <label for="checkAll" class="form-check-label">Check All</label>
+          </div>
+          <div class='w-full'>
+            <form id='editForm' action="/localpreneurs/<%= localpreneur._id %>/images?_method=DELETE" method="POST" class='flex flex-wrap'>
+              <% localpreneur.images.forEach((image, index) => { %>
+                <div class="col-md-4">
+                  <div class="card-mb-3">
+                    <img src="/images/<%= image.filename %>" alt="<% localpreneur.name %>" class="object-contain w-32 h-32">
+                    <div class="card-body">
+                      <label class="custom-checkbox">
+                        <input type="checkbox" name="images[]" value="<%= image.url %>">
+                        <span class="custom-checkbox-text">Pilih</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+              <div class="w-100"></div>
+            </form>
+            <button form='editForm' class="px-4 py-2 mt-4 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap flex-nowrap flex-shrink-0">Delete</button>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('checkAll').addEventListener('change', function() {
+    const checkboxes = document.getElementsByName('images[]');
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = this.checked
+    }
+  })
+</script>

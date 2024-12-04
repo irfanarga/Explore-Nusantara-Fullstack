@@ -6,7 +6,7 @@ module.exports.isAuthorDestination = async (req, res, next) => {
   const { id } = req.params;
   let destination = await Destination.findById(id);
 
-  if (!destination.author.equals(req.user._id) || req.user.role !== 'admin') {
+  if (!destination.author.equals(req.user._id)) {
     req.flash('error_msg', 'You are not authorized!');
     return res.redirect(`/destinations`);
   }
@@ -18,7 +18,7 @@ module.exports.isAuthorLocalpreneur = async (req, res, next) => {
   const { id } = req.params;
   let localpreneur = await Localpreneur.findById(id);
 
-  if (!localpreneur.author.equals(req.user._id) || req.user.role !== 'admin') {
+  if (!localpreneur.author.equals(req.user._id)) {
     req.flash('error_msg', 'You are not authorized!');
     return res.redirect(`/localpreneurs`);
   }
@@ -30,7 +30,7 @@ module.exports.isAuthorEvent = async (req, res, next) => {
   const { id } = req.params;
   let event = await Event.findById(id);
 
-  if (!event.author.equals(req.user._id) || req.user.role !== 'admin') {
+  if (!event.author.equals(req.user._id)) {
     req.flash('error_msg', 'You are not authorized!');
     return res.redirect(`/events`);
   }
