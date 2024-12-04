@@ -27,7 +27,7 @@
                     <li>Contact: <%= destination.phone %></li>
                   </ul>
                   <% if ((currentUser && destination.author.equals(currentUser._id))) { %>
-                  <div class='mb-3 ml-4'>
+                  <div class='p-4'>
                     <a href="/destinations/<%= destination._id %>/edit" class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Edit</a>
                     <form action="/destinations/<%= destination._id %>?_method=DELETE" method='POST' style='display: inline!important'>
                       <button class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Delete</button>
