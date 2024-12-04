@@ -40,13 +40,6 @@
           <button class="btn btn-danger">Delete</button>
         </form>
       </div> 
-      <% } else if (currentUser.role === 'admin') { %>  
-      <div class="card-body">
-        <a href="/destinations/<%= destination._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
-        <form action="/destinations/<%= destination._id %>?_method=DELETE" method='POST' style='display: inline!important'>
-          <button class="btn btn-danger">Delete</button>
-        </form>
-      </div> 
       <% } %>
     </div>
   </div>
