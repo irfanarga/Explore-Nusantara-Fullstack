@@ -48,8 +48,8 @@
             <input type="checkbox" id="checkAll" class="form-check-input">
             <label for="checkAll" class="form-check-label">Check All</label>
           </div>
-          <div class='w-full'></div>
-            <form action="/destinations/<%= destination._id %>/images?_method=DELETE" method="POST" class="flex flex-wrap">
+          <div class='w-full flex flex-wrap'>
+            <form action="/destinations/<%= destination._id %>/images?_method=DELETE" method="POST" >
               <% destination.images.forEach((image, index) => { %>
                 <div class="col-md-4">
                   <div class="card-mb-3">
