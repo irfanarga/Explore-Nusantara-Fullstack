@@ -1,24 +1,30 @@
 
 <% layout('layouts/app') %>  
 
-<h1>All Destinations</h1>
+<div class="min-h-screen bg-gray-50">
+<!-- Header -->
+<div class="bg-blue-600 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <a href="#" id="tombol-kembali" class="text-white flex items-center gap-2">
+      &larr; Kembali ke Beranda
+    </a>
+    <h1 class="text-2xl font-bold">Destinasi di Indonesia</h1>
+  </div>
+</div>
 
-<% for (const destination of destinations) { %>
-    <div class="card mb-3">
-      <div class="row">
-        <div class="col-md-4">
-          <img src="/images/<%= destination.images[0].filename %>" alt="<%= destination.name %>" class="img-fluid">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title"><%= destination.name %></h5>
-            <p class="card-text"><%= destination.description %></p>
-            <p class="card-text">
-              <small class="text-secondary"><%= destination.location %></small>
-            </p>
-            <a href="/destinations/<%= destination._id %>" class="btn btn-primary">View <%= destination.name %></a>
-          </div>
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <% for (const destination of destinations) { %>
+      <div class="destination-card text-center bg-white rounded-lg shadow-md overflow-hidden">
+        <img src=/images/<%= destination.images[0].filename %>" alt="<%= destination.name %>" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-4"><%= destination.name %></h3>
+          <p class="text-gray-600 mb-4"><%= destination.description %></p>
+          <a href="#/detail" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-md">
+            Jelajahi <%= destination.name %>
+          </a>
         </div>
       </div>
-    </div>
-<% } %>
+    <% } %>
+  </div>
+</div>
