@@ -12,13 +12,28 @@
 
     <!-- Menu Items -->
     <div id="menu" class="hidden lg:flex flex-col lg:flex-row lg:items-center lg:gap-6">
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Home</a>
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Destinations</a>
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Add Destinations</a>
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Localpreneurs</a>
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Add Localpreneurs</a>
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Events</a>
-      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Add Events</a>
+      <a href="/" class="block py-1 px-2 hover:underline rounded">Home</a>
+      <a href="/destinations" class="block py-1 px-2 hover:underline rounded">Destinations</a>
+      <a href="/destinations/create" class="block py-1 px-2 hover:underline rounded">Add Destinations</a>
+      <a href="/localpreneurs" class="block py-1 px-2 hover:underline rounded">Localpreneurs</a>
+      <a href="/localpreneurs/create" class="block py-1 px-2 hover:underline rounded">Add Localpreneurs</a>
+      <a href="/events" class="block py-1 px-2 hover:underline rounded">Events</a>
+      <a href="/events/create" class="block py-1 px-2 hover:underline rounded">Add Events</a>
+      <span>|</span>
+      <% if (!currentUser) { %>
+      <a href="/login" class="block py-1 px-2 hover:underline rounded">Login</a>
+      <a href="/register" class="block py-1 px-2 hover:underline rounded">Register</a>
+      <% } else { %>
+      <a href="/logout" class="block py-1 px-2 hover:underline rounded" onclick='
+      event.preventDefault();
+      document.getElementById("logout-form").submit();'>Logout</a>
+      <form
+      action="/logout"
+      method="POST"
+      class="hidden"
+      id="logout-form"
+      ></form>
+      <% } %>
     </div>
   </div>
 </nav>
