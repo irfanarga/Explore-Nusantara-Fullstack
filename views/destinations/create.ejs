@@ -2,76 +2,34 @@
 
 <h1 class='text-center'>Add Destination</h1>
 <div class="col-6 offset-3">
-  <form action="/destinations" method="post" class='validated-form' novalidate enctype="multipart/form-data">
+  <form action="/destinations" method="post" enctype="multipart/form-data">
     <div class='mb-3'>
       <label for="name" class='form-label'>Name</label>
-      <input type="text" name="destination[name]" id="name" class='form-control' required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <input type="text" name="destination[name]" id="name" required>
     </div>
     <div class='mb-3'>
       <label for="location" class='form-label'>Location</label>
-      <input type="text" name="destination[location]" id="location" class='form-control' required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <input type="text" name="destination[location]" id="location" required>
     </div>
     <div class='mb-3'>
       <label for="description" class='form-label'>Description</label>
-      <textarea name="destination[description]" id="description" class='form-control' required></textarea>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <textarea name="destination[description]" id="description" required></textarea>
     </div>
     <div class='mb-3'>
       <label for="city" class='form-label'>City</label>
-      <input type="text" name="destination[city]" id="city" class='form-control' required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <input type="text" name="destination[city]" id="city" required>
     </div>
     <div class='mb-3'>
       <label for="phone" class='form-label'>Phone Number</label>
-      <input type="text" name="destination[phone]" id="phone" class='form-control' required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <input type="text" name="destination[phone]" id="phone" required>
     </div>
     <div class='mb-3'>
       <label for="price" class='form-label'>Price</label>
-      <input type="number" name="destination[price]" id="price" class='form-control' required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <input type="number" name="destination[price]" id="price" required>
     </div>
     <div class='mb-3'>
       <label for="image" class='form-label'>Image</label>
-      <input type="file" name="image" id="image" accept="image/*" class="form-control" multiple required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        Please fill out this field.
-      </div>
+      <input type="file" name="image" id="image" accept="image/*" multiple required>
     </div>
     <button type="submit" class='btn btn-success'>Save</button>
   </form>
