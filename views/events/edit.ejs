@@ -1,118 +1,77 @@
 <% layout('layouts/app') %>  
 
-<h1 class='text-center'>Edit Event</h1>
-<div class="row mb-5">
-  <div class="col-6" <%= !event.images.length > 0 ? 'offset-3' : '' %>>
-    <form action="/events/<%= event._id %>?_method=PUT" method="post" class='validated-form' novalidate enctype="multipart/form-data">
-      <div class='mb-3'>
-        <label for="name" class='form-label'>Name</label>
-        <input type="text" name="event[name]" id="name" class='form-control' value='<%= event.name %>' required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
+<h1 class="text-center text-2xl font-bold text-gray-800 mb-6">Edit Event</h1> 
+<div class='grid grid-cols-2 gap-6'>
+  <div class='p-4'>
+    <div class="bg-white rounded-lg shadow-md mb-8">
+      <div class='p-4'>
+        <form action="/events/<%= event._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+          <div class='mb-3'>
+            <label for="name" class='block text-sm font-medium text-gray-700'>Name</label>
+            <input type="text" name="event[name]" id="name" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= event.name %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="location" class='block text-sm font-medium text-gray-700'>Location</label>
+            <input type="text" name="event[location]" id="location" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= event.location %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="description" class='block text-sm font-medium text-gray-700'>Description</label>
+            <textarea name="event[description]" id="description" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' required><%= event.description %></textarea>
+          </div>
+          <div class='mb-3'>
+            <label for="city" class='block text-sm font-medium text-gray-700'>City</label>
+            <input type="text" name="event[city]" id="city" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= event.city %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="phone" class='block text-sm font-medium text-gray-700'>Phone Number</label>
+            <input type="text" name="event[phone]" id="phone" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= event.phone %>' required>
+          </div>
+          <div class='mb-3'>
+            <label for="price" class='block text-sm font-medium text-gray-700'>Price</label>
+            <input type="number" name="event[price]" id="price" class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' value='<%= event.price %>' required>
+          </div>
+          <div class='mb-6'>
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image" accept="image/*" multiple>
+          </div>
+          <button type='submit' class='px-4 py-2 bg-green-500 text-white font-semibold rounded-md text-sm whitespace-nowrap'>Submit</button>
+        </form>
       </div>
-      <div class='mb-3'>
-        <label for="date" class='form-label'>Date</label>
-        <input type="date" name="event[date]" id="date" class='form-control' value='<%= event.date %>' required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <div class='mb-3'>
-        <label for="location" class='form-label'>Location</label>
-        <input type="text" name="event[location]" id="location" class='form-control' value='<%= event.location %>' required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <div class='mb-3'>
-        <label for="description" class='form-label'>Description</label>
-        <textarea name="event[description]" id="description" class='form-control' required><%= event.description %></textarea>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <div class='mb-3'>
-        <label for="city" class='form-label'>City</label>
-        <input type="text" name="event[city]" id="city" class='form-control' value='<%= event.city %>' required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <div class='mb-3'>
-        <label for="phone" class='form-label'>Phone Number</label>
-        <input type="text" name="event[phone]" id="phone" class='form-control' value='<%= event.phone %>' required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <div class='mb-3'>
-        <label for="price" class='form-label'>Price</label>
-        <input type="number" name="event[price]" id="price" class='form-control' value='<%= event.price %>' required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <div class='mb-3'>
-        <label for="image" class='form-label'>Image</label>
-        <input type="file" name="image" id="image" accept="image/*" class="form-control" multiple>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
-      </div>
-      <button type="submit" class='btn btn-success'>Save</button>
-    </form>
-  </div>
-  <% if (event.images.length > 0) { %>
-  <div class="col-6">
-    <h5 class="text-center">Delete Image</h5>
-    <div class="form-group form-check">
-      <input type="checkbox" id="checkAll" class="form-check-input">
-      <label for="checkAll" class="form-check-label">Check All</label>
     </div>
-    <form action="/events/<%= event._id %>/images?_method=DELETE" method="POST" class="d-flex flex-wrap">
-      <% event.images.forEach((image, index) => { %>
-        <div class="col-md-4">
-          <div class="card-mb-3">
-            <img src="/images/<%= image.filename %>" alt="<% event.name %>" class="card-img-top">
-            <div class="card-body">
-              <label class="custom-checkbox">
-                <input type="checkbox" name="images[]" value="<%= image.url %>">
-                <span class="custom-checkbox-text">Pilih</span>
-              </label>
-            </div>
+  </div>
+  <div class='p-4'>
+    <div class="bg-white rounded-lg shadow-md mb-8">
+      <% if (event.images.length > 0) { %>
+        <div class="p-4">
+          <h5 class="text-center">Delete Image</h5>
+          <hr class="my-4 border-gray-900">
+          <div class="form-group form-check mb-4">
+            <input type="checkbox" id="checkAll" class="form-check-input">
+            <label for="checkAll" class="form-check-label">Check All</label>
+          </div>
+          <div class='w-full'>
+            <form id='editForm' action="/events/<%= event._id %>/images?_method=DELETE" method="POST" class='flex flex-wrap'>
+              <% event.images.forEach((image, index) => { %>
+                <div class="col-md-4">
+                  <div class="card-mb-3">
+                    <img src="/images/<%= image.filename %>" alt="<% event.name %>" class="object-contain w-32 h-32">
+                    <div class="card-body">
+                      <label class="custom-checkbox">
+                        <input type="checkbox" name="images[]" value="<%= image.url %>">
+                        <span class="custom-checkbox-text">Pilih</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+              <div class="w-100"></div>
+            </form>
+            <button form='editForm' class="px-4 py-2 mt-4 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap flex-nowrap flex-shrink-0">Delete</button>
           </div>
         </div>
-      <% }) %>
-      <div class="w-100"></div>
-      <button class="btn btn-danger" type="submit">Delete</button>
-    </form>
+        <% } %>
+    </div>
   </div>
-  <% } %>
 </div>
 
 <script>

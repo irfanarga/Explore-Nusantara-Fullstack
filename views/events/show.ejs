@@ -1,78 +1,75 @@
 <% layout('layouts/app') %>  
 
-<div class="row mb-5">
-  <div class="col-6">
-    <div class="card">
-      <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-          <% event.images.forEach((image, index) => { %>
-          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-            <img src="/images/<%= image.filename %>" class="d-block w-100" alt="<%= event.name %>">
+<div class='grid grid-cols-2 gap-6'>
+  <div class='p-4'>
+    <div class="bg-white rounded-lg shadow-md mb-8">
+      <div class="p-6 border-b md:grid-cols-6">
+          <h2 class="text-xl font-bold flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Event
+          </h2>
+      </div>
+      <div>
+          <div>
+              <div class='p-4'>
+                  <div class='w-full h-80'>
+                    <img src="/images/<%= event.images[0].filename %>" alt="<%= event.name %>" class='object-contain w-full h-full mx-auto'>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="font-bold text-lg mb-2"><%= event.name %></h3>
+                      <p class="text-gray-600"><%= event.description %></p>
+                  </div>
+                  <ul class='p-4'>
+                    <li>Lokasi: <%= event.location %>, <%= event.city %></li>
+                    <li>Harga: <%= event.price %></li>
+                    <li>Posted by: <%= event.author.username %></li>
+                    <li>Contact: <%= event.phone %></li>
+                  </ul>
+                  <% if ((currentUser && event.author.equals(currentUser._id))) { %>
+                  <div class='p-4'>
+                    <a href="/events/<%= event._id %>/edit" class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Edit</a>
+                    <form action="/events/<%= event._id %>?_method=DELETE" method='POST' style='display: inline!important'>
+                      <button class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Delete</button>
+                    </form>
+                  </div> 
+                  <% } %>
+              </div>
           </div>
-          <% }) %>
-        </div>
-        <% if (event.images.length > 1) { %>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-        <% } %>
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= event.name %></h5>
-        <p class="card-text"><%= event.date.toLocaleDateString('id') %></p>
-        <p class="card-text"><%= event.description %></p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><%= event.location %></li>
-        <li class="list-group-item"><%= event.city %></li>
-        <li class="list-group-item">Author: <%= event.author.username %></li>
-        <li class="list-group-item"><%= event.phone %></li>
-        <li class="list-group-item"><%= event.price %></li>
-      </ul> 
-      <% if ((currentUser && event.author.equals(currentUser._id)) || currentUser.role === 'admin') { %>
-      <div class="card-body">
-        <a href="/events/<%= event._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
-        <form action="/events/<%= event._id %>?_method=DELETE" method='POST' style='display: inline!important'>
-          <button class="btn btn-danger">Delete</button>
-        </form>
-      </div> 
-      <% } %>  
     </div>
   </div>
-  <div class="col-6">
-    <h3>Leave a review</h3>
-    <form action="/events/<%= event._id %>/eventreviews" method='POST' class='validated-form mb-3' novalidate>
-      <div class="mb-3">
-        <label for="rating">Rating</label>
-        <input type="range" name='eventReview[rating]' id='rating' min='1' max='5' class='form-range'>
-      </div>
-      <div class="mb-3">
-        <label for="review">Review</label>
-        <textarea name="eventReview[body]" id="body" cols='30' rows='5' class='form-control' required></textarea>
-        <div class="valid-feedback">
-          Looks good!
+  <div class="p-4">
+    <div class="bg-white rounded-lg shadow-md mb-8">
+      <div class="p-6 border-b md:grid-cols-6">
+        <h3 class='font-bold'>Leave a Review</h3>
+        <form action="/events/<%= event._id %>/eventreviews" method='POST' class='mb-3'>
+          <div class="mb-3">
+            <label for="rating">Rating</label>
+            <input type="range" name='eventReview[rating]' id='rating' min='1' max='5' class='w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>
+          </div>
+          <div class="mb-3">
+            <label for="review">Review</label>
+            <textarea name="eventReview[body]" id="body" cols='30' rows='5' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' required></textarea>
+          </div>
+          <button type='submit' class='px-4 py-2 bg-green-500 text-white font-semibold rounded-md text-sm whitespace-nowrap'>Submit</button>
+        </form>
+        <hr class="my-4 border-gray-900">
+        <% for (const review of event.reviews) { %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Rating: <%= review.rating %></h5>
+              <p class="pb-2"><%= review.body %></p>
+              <form action="/events/<%= event._id %>/eventreviews/<%= review._id %>?_method=DELETE" method="POST" style='display: inline!important'>
+                <button class='px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap'>Delete</button>
+              </form>
+            </div>
+          </div>
+        <% } %>
         </div>
-        <div class="invalid-feedback">
-          Please fill out this field.
-        </div>
       </div>
-      <button type='submit' class='btn btn-success'>Submit</button>
-    </form>
-    <% for (const review of event.reviews) { %>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Rating: <%= review.rating %></h5>
-          <p class="card-text"><%= review.body %></p>
-          <form action="/events/<%= event._id %>/eventreviews/<%= review._id %>?_method=DELETE" method="POST" style='display: inline!important'>
-            <button class='btn btn-danger btn-sm'>Delete</button>
-          </form>
-        </div>
-      </div>
-    <% } %>
+    </div>
   </div>
 </div>
