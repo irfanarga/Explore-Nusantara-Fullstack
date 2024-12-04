@@ -1,94 +1,24 @@
-<nav class="bg-blue-600 sticky top-0 shadow-lg">
-  <div class="container mx-auto px-4 py-2 flex items-center justify-between">
-    <a class="text-white text-lg font-bold" href="/">Explore Nusantara</a>
-    <button
-      class="text-white lg:hidden focus:outline-none"
-      type="button"
-      aria-expanded="false"
-      aria-controls="navbarNav"
-      aria-label="Toggle navigation"
-      onclick="document.getElementById('navbarNav').classList.toggle('hidden')"
-    >
-      <span class="material-icons">Menu</span>
+<nav class="bg-blue-600 sticky top-0 shadow-md">
+  <div class="container mx-auto flex items-center justify-between px-4 py-3">
+    <!-- Logo -->
+    <a href="#" class="text-lg font-semibold">Explore Nusantara</a>
+
+    <!-- Mobile Menu Button -->
+    <button id="menuButton" class="block lg:hidden text-white focus:outline-none">
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
     </button>
-    <div class="hidden w-full lg:flex lg:items-center lg:w-auto" id="navbarNav">
-      <ul class="flex flex-col lg:flex-row lg:space-x-4">
-        <li>
-          <a class="text-white hover:underline px-2 py-1" href="/">Home</a>
-        </li>
-        <li>
-          <a
-            class="text-white hover:underline px-2 py-1"
-            href="/destinations"
-            >Destinations</a
-          >
-        </li>
-        <li>
-          <a
-            class="text-white hover:underline px-2 py-1"
-            href="/destinations/create"
-            >Add Destination</a
-          >
-        </li>
-        <li>
-          <a
-            class="text-white hover:underline px-2 py-1"
-            href="/localpreneurs"
-            >Localpreneurs</a
-          >
-        </li>
-        <li>
-          <a
-            class="text-white hover:underline px-2 py-1"
-            href="/localpreneurs/create"
-            >Add Localpreneur</a
-          >
-        </li>
-        <li>
-          <a class="text-white hover:underline py-1" href="/events"
-            >Events</a
-          >
-        </li>
-        <li>
-          <a
-            class="text-white hover:underline px-2 py-1"
-            href="/events/create"
-            >Add Event</a
-          >
-        </li>
-      </ul>
-      <ul class="flex flex-col lg:flex-row lg:space-x-4 ml-auto mt-4 lg:mt-0">
-        <% if (!currentUser) { %>
-        <li>
-          <a class="text-white hover:underline px-2 py-1" href="/login"
-            >Login</a
-          >
-        </li>
-        <li>
-          <a class="text-white hover:underline px-2 py-1" href="/register"
-            >Registration</a
-          >
-        </li>
-        <% } else { %>
-        <li>
-          <a
-            class="text-white hover:underline px-2 py-1"
-            href="/logout"
-            onclick='
-            event.preventDefault();
-            document.getElementById("logout-form").submit();
-          '
-            >Logout</a
-          >
-          <form
-            action="/logout"
-            method="POST"
-            class="hidden"
-            id="logout-form"
-          ></form>
-        </li>
-        <% } %>
-      </ul>
+
+    <!-- Menu Items -->
+    <div id="menu" class="hidden lg:flex flex-col lg:flex-row lg:items-center lg:gap-6">
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Home</a>
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Destinations</a>
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Add Destinations</a>
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Localpreneurs</a>
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Add Localpreneurs</a>
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Events</a>
+      <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">Add Events</a>
     </div>
   </div>
 </nav>

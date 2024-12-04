@@ -1,0 +1,94 @@
+<nav class="bg-blue-600 sticky top-0 shadow-md">
+  <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+    <a class="text-white text-lg font-bold" href="/">Explore Nusantara</a>
+    <button
+      class="text-white md:hidden focus:outline-none"
+      type="button"
+      aria-expanded="false"
+      aria-controls="navbarNav"
+      aria-label="Toggle navigation"
+      onclick="document.getElementById('navbarNav').classList.toggle('hidden')"
+    >
+      <span class="material-icons">Menu</span>
+    </button>
+    <div class="hidden w-full md:flex md:items-center md:w-auto" id="navbarNav">
+      <ul class="flex flex-col md:flex-row md:space-x-4">
+        <li>
+          <a class="text-white hover:underline px-2 py-1" href="/">Home</a>
+        </li>
+        <li>
+          <a
+            class="text-white hover:underline px-2 py-1"
+            href="/destinations"
+            >Destinations</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:underline px-2 py-1"
+            href="/destinations/create"
+            >Add Destination</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:underline px-2 py-1"
+            href="/localpreneurs"
+            >Localpreneurs</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:underline px-2 py-1"
+            href="/localpreneurs/create"
+            >Add Localpreneur</a
+          >
+        </li>
+        <li>
+          <a class="text-white hover:underline py-1" href="/events"
+            >Events</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:underline px-2 py-1"
+            href="/events/create"
+            >Add Event</a
+          >
+        </li>
+      </ul>
+      <ul class="flex flex-col md:flex-row md:space-x-4 ml-auto mt-4 md:mt-0">
+        <% if (!currentUser) { %>
+        <li>
+          <a class="text-white hover:underline px-2 py-1" href="/login"
+            >Login</a
+          >
+        </li>
+        <li>
+          <a class="text-white hover:underline px-2 py-1" href="/register"
+            >Registration</a
+          >
+        </li>
+        <% } else { %>
+        <li>
+          <a
+            class="text-white hover:underline px-2 py-1"
+            href="/logout"
+            onclick='
+            event.preventDefault();
+            document.getElementById("logout-form").submit();
+          '
+            >Logout</a
+          >
+          <form
+            action="/logout"
+            method="POST"
+            class="hidden"
+            id="logout-form"
+          ></form>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
