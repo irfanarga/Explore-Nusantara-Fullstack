@@ -2,8 +2,8 @@
 
 <h1 class="text-center text-2xl font-bold text-gray-800 mb-6">Edit Destination</h1> 
 <div class="grid grid-cols-2 gap-6" <%= !destination.images.length > 0 ? 'offset-3' : '' %>>
-  <div class="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mb-8"></div>
-    <div class='p-4'>
+  <div class='p-4'></div>
+    <div class="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mb-8"></div>
       <form action="/destinations/<%= destination._id %>?_method=PUT" method="post" enctype="multipart/form-data">
         <div class='mb-3'>
           <label for="name" class='block text-sm font-medium text-gray-700'>Name</label>
