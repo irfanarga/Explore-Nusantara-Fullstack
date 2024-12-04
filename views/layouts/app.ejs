@@ -8,10 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../styles/style.css" />
   </head>
-  <body class="d-flex flex-column vh-100">
+  <body class="flex flex-col min-h-screen">
     <%- include('partials/navbar') %>
 
-    <main class="container mt-5">
+    <main class="container mt-5 flex-grow">
       <% include('partials/alert') %> <%- body -%>
     </main>
 
