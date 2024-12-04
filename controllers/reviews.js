@@ -3,8 +3,8 @@ const Destination = require('../models/destination');
 
 module.exports.index = async (req, res) => {
   const reviews = await Review.find();
-  // res.render('destinations/index', { reviews });
-  res.status(200).json({message: 'success', data: { reviews }});
+  res.render('destinations/index', { reviews });
+  // res.status(200).json({message: 'success', data: { reviews }});
 }
 
 module.exports.store = async (req, res) => {

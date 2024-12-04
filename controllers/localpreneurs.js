@@ -4,8 +4,8 @@ const ExpressError = require('../utils/ErrorHandler');
 
 module.exports.index = async (req, res) => {
   const localpreneurs = await Localpreneur.find();
-  // res.render('localpreneurs/index', { localpreneurs });
-  res.status(200).json({message: 'success', data: { localpreneurs }});
+  res.render('localpreneurs/index', { localpreneurs });
+  // res.status(200).json({message: 'success', data: { localpreneurs }});
 }
 
 module.exports.store = async (req, res, next) => {
@@ -25,8 +25,8 @@ module.exports.store = async (req, res, next) => {
 module.exports.show = async (req, res) => {
   const { id } = req.params;
   const localpreneur = await Localpreneur.findById(id).populate('reviews').populate('author');
-  // res.render('localpreneurs/show', { localpreneur });
-  res.status(200).json({message: 'success', data: { localpreneur }});
+  res.render('localpreneurs/show', { localpreneur });
+  // res.status(200).json({message: 'success', data: { localpreneur }});
 }
 
 module.exports.edit = async (req, res) => {

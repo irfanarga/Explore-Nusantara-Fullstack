@@ -3,8 +3,8 @@ const Localpreneur = require('../models/localpreneur');
 
 module.exports.index = async (req, res) => {
   const localpreneurReviews = await LocalpreneurReview.find();
-  // res.render('localpreneurs/index', { localpreneurReviews });
-  res.status(200).json({message: 'success', data: { localpreneurReviews }});
+  res.render('localpreneurs/index', { localpreneurReviews });
+  // res.status(200).json({message: 'success', data: { localpreneurReviews }});
 }
 
 module.exports.store = async (req, res) => {

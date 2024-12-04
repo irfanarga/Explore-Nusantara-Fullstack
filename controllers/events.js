@@ -4,8 +4,8 @@ const ExpressError = require('../utils/ErrorHandler');
 
 module.exports.index = async (req, res) => {
   const events = await Event.find();
-  // res.render('events/index', { events });
-  res.status(200).json({message: 'success', data: { events }});
+  res.render('events/index', { events });
+  // res.status(200).json({message: 'success', data: { events }});
 }
 
 module.exports.store = async (req, res, next) => {
@@ -25,8 +25,8 @@ module.exports.store = async (req, res, next) => {
 module.exports.show = async (req, res) => {
   const { id } = req.params;
   const event = await Event.findById(id).populate('reviews').populate('author');
-  // res.render('events/show', { event });
-  res.status(200).json({message: 'success', data: { event }});
+  res.render('events/show', { event });
+  // res.status(200).json({message: 'success', data: { event }});
 }
 
 module.exports.edit = async (req, res) => {

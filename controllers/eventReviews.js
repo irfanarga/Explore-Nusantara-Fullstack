@@ -3,8 +3,8 @@ const Event = require('../models/event');
 
 module.exports.index = async (req, res) => {
   const eventReviews = await EventReview.find();
-  // res.render('events/index', { eventReviews });
-  res.status(200).json({message: 'success', data: { eventReviews }});
+  res.render('events/index', { eventReviews });
+  // res.status(200).json({message: 'success', data: { eventReviews }});
 }
 
 module.exports.store = async (req, res) => {
