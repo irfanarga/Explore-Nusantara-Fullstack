@@ -37,33 +37,33 @@
       </form>
     </div>
   </div>
-  <% if (destination.images.length > 0) { %>
-  <div class="p-4">
-    <h5 class="text-center">Delete Image</h5>
-    <div class="form-group form-check">
-      <input type="checkbox" id="checkAll" class="form-check-input">
-      <label for="checkAll" class="form-check-label">Check All</label>
-    </div>
-    <form action="/destinations/<%= destination._id %>/images?_method=DELETE" method="POST" class="d-flex flex-wrap">
-      <% destination.images.forEach((image, index) => { %>
-        <div class="col-md-4">
-          <div class="card-mb-3">
-            <img src="/images/<%= image.filename %>" alt="<% destination.name %>" class="card-img-top">
-            <div class="card-body">
-              <label class="custom-checkbox">
-                <input type="checkbox" name="images[]" value="<%= image.url %>">
-                <span class="custom-checkbox-text">Pilih</span>
-              </label>
-            </div>
+</div>
+<% if (destination.images.length > 0) { %>
+<div class="p-4">
+  <h5 class="text-center">Delete Image</h5>
+  <div class="form-group form-check">
+    <input type="checkbox" id="checkAll" class="form-check-input">
+    <label for="checkAll" class="form-check-label">Check All</label>
+  </div>
+  <form action="/destinations/<%= destination._id %>/images?_method=DELETE" method="POST" class="d-flex flex-wrap">
+    <% destination.images.forEach((image, index) => { %>
+      <div class="col-md-4">
+        <div class="card-mb-3">
+          <img src="/images/<%= image.filename %>" alt="<% destination.name %>" class="card-img-top">
+          <div class="card-body">
+            <label class="custom-checkbox">
+              <input type="checkbox" name="images[]" value="<%= image.url %>">
+              <span class="custom-checkbox-text">Pilih</span>
+            </label>
           </div>
         </div>
-      <% }) %>
-      <div class="w-100"></div>
-      <button class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Delete</button>
-    </form>
-  </div>
-  <% } %>
+      </div>
+    <% }) %>
+    <div class="w-100"></div>
+    <button class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md text-sm whitespace-nowrap">Delete</button>
+  </form>
 </div>
+<% } %>
 
 <script>
   document.getElementById('checkAll').addEventListener('change', function() {
