@@ -23,6 +23,7 @@
                       <p class="text-gray-600"><%= event.description %></p>
                   </div>
                   <ul class='p-4'>
+                    <li>Tanggal: <%= event.date.toLocaleDateString('id') %></li>
                     <li>Lokasi: <%= event.location %>, <%= event.city %></li>
                     <li>Harga: <%= event.price %></li>
                     <li>Posted by: <%= event.author.username %></li>
