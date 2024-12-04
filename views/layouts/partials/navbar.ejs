@@ -1,4 +1,4 @@
-<nav class="bg-gray-900 sticky top-0 shadow-md">
+<nav class="bg-blue-600 sticky top-0 shadow-md">
   <div class="container mx-auto px-4 py-2 flex items-center justify-between">
     <a class="text-white text-lg font-bold" href="/">Explore Nusantara</a>
     <button
@@ -9,70 +9,70 @@
       aria-label="Toggle navigation"
       onclick="document.getElementById('navbarNav').classList.toggle('hidden')"
     >
-      <span class="material-icons">menu</span>
+      <span class="material-icons">Menu</span>
     </button>
     <div class="hidden w-full md:flex md:items-center md:w-auto" id="navbarNav">
       <ul class="flex flex-col md:flex-row md:space-x-4">
         <li>
-          <a class="text-gray-300 hover:text-white px-2 py-1" href="/">Home</a>
+          <a class="text-white hover:underline px-2 py-1" href="/">Home</a>
         </li>
         <li>
           <a
-            class="text-gray-300 hover:text-white px-2 py-1"
+            class="text-white hover:underline px-2 py-1"
             href="/destinations"
             >Destinations</a
           >
         </li>
         <li>
           <a
-            class="text-gray-300 hover:text-white px-2 py-1"
+            class="text-white hover:underline px-2 py-1"
             href="/destinations/create"
-            >New Destination</a
+            >Add Destination</a
           >
         </li>
         <li>
           <a
-            class="text-gray-300 hover:text-white px-2 py-1"
+            class="text-white hover:underline px-2 py-1"
             href="/localpreneurs"
             >Localpreneurs</a
           >
         </li>
         <li>
           <a
-            class="text-gray-300 hover:text-white px-2 py-1"
+            class="text-white hover:underline px-2 py-1"
             href="/localpreneurs/create"
-            >New Localpreneurs</a
+            >Add Localpreneur</a
           >
         </li>
         <li>
-          <a class="text-gray-300 hover:text-white px-2 py-1" href="/events"
+          <a class="text-white hover:underline py-1" href="/events"
             >Events</a
           >
         </li>
         <li>
           <a
-            class="text-gray-300 hover:text-white px-2 py-1"
+            class="text-white hover:underline px-2 py-1"
             href="/events/create"
-            >New Events</a
+            >Add Event</a
           >
         </li>
       </ul>
       <ul class="flex flex-col md:flex-row md:space-x-4 ml-auto mt-4 md:mt-0">
         <% if (!currentUser) { %>
         <li>
-          <a class="text-gray-300 hover:text-white px-2 py-1" href="/login"
+          <a class="text-white hover:underline px-2 py-1" href="/login"
             >Login</a
           >
         </li>
         <li>
-          <a class="text-gray-300 hover:text-white px-2 py-1" href="/register"
+          <a class="text-white hover:underline px-2 py-1" href="/register"
             >Registration</a
           >
         </li>
         <% } else { %>
         <li>
           <a
-            class="text-gray-300 hover:text-white px-2 py-1"
+            class="text-white hover:underline px-2 py-1"
             href="/logout"
             onclick='
             event.preventDefault();
