@@ -52,7 +52,7 @@
             <% destination.images.forEach((image, index) => { %>
               <div class="col-md-4">
                 <div class="card-mb-3">
-                  <img src="/images/<%= image.filename %>" alt="<% destination.name %>" class="card-img-top">
+                  <img src="/images/<%= image.filename %>" alt="<% destination.name %>" class="block w-72 h-32 mx-auto">
                   <div class="card-body">
                     <label class="custom-checkbox">
                       <input type="checkbox" name="images[]" value="<%= image.url %>">
