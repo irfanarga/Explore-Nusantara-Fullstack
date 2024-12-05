@@ -21,5 +21,6 @@ const menuButton = document.getElementById('menuButton');
 const menu = document.getElementById('menu');
 
 menuButton.addEventListener('click', () => {
-  menu.classList.toggle('hidden');
+  slideMenu.classList.toggle('-translate-x-full');
+  slideMenu.classList.toggle('translate-x-0');
 });
