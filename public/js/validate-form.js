@@ -21,7 +21,5 @@ const menuButton = document.getElementById('menuButton');
 const menu = document.getElementById('menu');
 
 menuButton.addEventListener('click', () => {
-  menu.classList.toggle('-translate-x-full');
-  menu.classList.toggle('translate-x-0');
   menu.classList.toggle('hidden');
 });
