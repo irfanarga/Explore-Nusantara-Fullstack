@@ -4,14 +4,14 @@
     <a href="/" class="text-white text-lg font-semibold">Explore Nusantara</a>
 
     <!-- Mobile Menu Button -->
-    <button id="menuButton" class="block lg:hidden text-white focus:outline-none">
+    <button id="menuButton" class="fixed lg:hidden text-white focus:outline-none">
       <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
       </svg>
     </button>
 
     <!-- Menu Items -->
-    <div id="menu" class="hidden lg:flex lg:flex-row lg:gap-6">
+    <div id="menu" class="hidden lg:flex flex-col lg:flex-row lg:gap-6">
       <a href="/" class="text-white block py-1 px-2 hover:underline rounded">Home</a>
       <a href="/destinations" class="text-white block py-1 px-2 hover:underline rounded">Destinations</a>
       <a href="/destinations/create" class="text-white block py-1 px-2 hover:underline rounded">Add Destinations</a>
@@ -19,7 +19,7 @@
       <a href="/localpreneurs/create" class="text-white block py-1 px-2 hover:underline rounded">Add Localpreneurs</a>
       <a href="/events" class="text-white block py-1 px-2 hover:underline rounded">Events</a>
       <a href="/events/create" class="text-white block py-1 px-2 hover:underline rounded">Add Events</a>
-      <span class="text-white block py-1 px-2 sm:hidden">|</span>
+      <span class="text-white block py-1 px-2">|</span>
       <% if (!currentUser) { %>
       <a href="/login" class="text-white block py-1 px-2 hover:underline rounded">Login</a>
       <a href="/register" class="text-white block py-1 px-2 hover:underline rounded">Register</a>
