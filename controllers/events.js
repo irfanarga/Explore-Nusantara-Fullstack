@@ -1,6 +1,7 @@
 const Event = require('../models/event');
 const fs = require('fs');
 const ExpressError = require('../utils/ErrorHandler');
+const { geometry } = require('../utils/hereMaps');
 
 module.exports.index = async (req, res) => {
   const events = await Event.find();
@@ -13,9 +14,14 @@ module.exports.store = async (req, res, next) => {
     url: file.path,
     filename: file.filename
   }));
+
+  const geoData = await geometry(req.body.event.location);
+
   const event = new Event(req.body.event);
   event.author = req.user._id;
   event.images = images;
+  event.geometry = geoData;
+
   await event.save();
   req.flash('success_msg', 'Successfully add a new event!');
   res.redirect(`/events`);
@@ -44,8 +50,12 @@ module.exports.edit = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
+  const { event } = req.body;
+
+  const geoData = await geometry(req.body.event.location);
+
   const { id } = req.params;
-  const event = await Event.findByIdAndUpdate(id, { ...req.body.event })
+  const newEvent = await Event.findByIdAndUpdate(id, { ...event, geometry: geoData });
   if (req.files && req.files.length > 0) {
     event.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
@@ -55,8 +65,8 @@ module.exports.update = async (req, res) => {
       url: file.path,
       filename: file.filename
     }))
-    event.images = images;
-    await event.save();
+    newEvent.images = images;
+    await newEvent.save();
   }
   req.flash('success_msg', 'Successfully update event!');
   res.redirect(`/events/${id}`);

@@ -1,6 +1,7 @@
 const Localpreneur = require('../models/localpreneur');
 const fs = require('fs');
 const ExpressError = require('../utils/ErrorHandler');
+const { geometry } = require('../utils/hereMaps');
 
 module.exports.index = async (req, res) => {
   const localpreneurs = await Localpreneur.find();
@@ -13,9 +14,14 @@ module.exports.store = async (req, res, next) => {
     url: file.path,
     filename: file.filename
   }));
+
+  const geoData = await geometry(req.body.localpreneur.location);
+
   const localpreneur = new Localpreneur(req.body.localpreneur);
   localpreneur.author = req.user._id;
   localpreneur.images = images;
+  localpreneur.geometry = geoData;
+
   await localpreneur.save();
   req.flash('success_msg', 'Successfully add a new localpreneur!');
   res.redirect(`/localpreneurs`);
@@ -44,8 +50,12 @@ module.exports.edit = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
+  const { localpreneur } = req.body;
+
+  const geoData = await geometry(req.body.localpreneur.location);
+
   const { id } = req.params;
-  const localpreneur = await Localpreneur.findByIdAndUpdate(id, { ...req.body.localpreneur })
+  const newLocalpreneur = await Localpreneur.findByIdAndUpdate(id, { ...localpreneur, geometry: geoData });
   if (req.files && req.files.length > 0) {
     localpreneur.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
@@ -55,8 +65,8 @@ module.exports.update = async (req, res) => {
       url: file.path,
       filename: file.filename
     }))
-    localpreneur.images = images;
-    await localpreneur.save();
+    newLocalpreneur.images = images;
+    await newLocalpreneur.save();
   }
   req.flash('success_msg', 'Successfully update localpreneur!');
   res.redirect(`/localpreneurs/${id}`);

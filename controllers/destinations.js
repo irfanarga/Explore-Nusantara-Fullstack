@@ -1,6 +1,7 @@
 const Destination = require('../models/destination');
 const fs = require('fs');
 const ExpressError = require('../utils/ErrorHandler');
+const { geometry } = require('../utils/hereMaps');
 
 module.exports.index = async (req, res) => {
   const destinations = await Destination.find();
@@ -13,9 +14,14 @@ module.exports.store = async (req, res, next) => {
     url: file.path,
     filename: file.filename
   }));
+
+  const geoData = await geometry(req.body.destination.location);
+
   const destination = new Destination(req.body.destination);
   destination.author = req.user._id;
   destination.images = images;
+  destination.geometry = geoData;
+
   await destination.save();
   req.flash('success_msg', 'Successfully add a new destination!');
   res.redirect(`/destinations`);
@@ -44,8 +50,12 @@ module.exports.edit = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
+  const { destination } = req.body;
+
+  const geoData = await geometry(req.body.destination.location);
+
   const { id } = req.params;
-  const destination = await Destination.findByIdAndUpdate(id, { ...req.body.destination })
+  const newDestination = await Destination.findByIdAndUpdate(id, { ...destination, geometry: geoData });
   if (req.files && req.files.length > 0) {
     destination.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
@@ -55,8 +65,8 @@ module.exports.update = async (req, res) => {
       url: file.path,
       filename: file.filename
     }))
-    destination.images = images;
-    await destination.save();
+    newDestination.images = images;
+    await newDestination.save();
   }
   req.flash('success_msg', 'Successfully update destination!');
   res.redirect(`/destinations/${id}`);
