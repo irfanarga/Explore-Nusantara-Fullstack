@@ -57,7 +57,7 @@ module.exports.update = async (req, res) => {
   const { id } = req.params;
   const newEvent = await Event.findByIdAndUpdate(id, { ...event, geometry: geoData });
   if (req.files && req.files.length > 0) {
-    event.images.forEach(image => {
+    newEvent.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
     })
 

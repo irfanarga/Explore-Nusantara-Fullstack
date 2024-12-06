@@ -57,7 +57,7 @@ module.exports.update = async (req, res) => {
   const { id } = req.params;
   const newLocalpreneur = await Localpreneur.findByIdAndUpdate(id, { ...localpreneur, geometry: geoData });
   if (req.files && req.files.length > 0) {
-    localpreneur.images.forEach(image => {
+    newLocalpreneur.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
     })
 

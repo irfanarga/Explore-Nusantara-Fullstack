@@ -57,7 +57,7 @@ module.exports.update = async (req, res) => {
   const { id } = req.params;
   const newDestination = await Destination.findByIdAndUpdate(id, { ...destination, geometry: geoData });
   if (req.files && req.files.length > 0) {
-    destination.images.forEach(image => {
+    newDestination.images.forEach(image => {
       fs.unlink(image.url, err => new ExpressError(err));
     })
 
