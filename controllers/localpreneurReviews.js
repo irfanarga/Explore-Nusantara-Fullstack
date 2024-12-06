@@ -8,13 +8,15 @@ module.exports.index = async (req, res) => {
 }
 
 module.exports.store = async (req, res) => {
+  const { localpreneur_id } = req.params;
   const localpreneurReview = new LocalpreneurReview(req.body.localpreneurReview);
-  const localpreneur = await Localpreneur.findById(req.params.localpreneur_id);
-  localpreneur.reviews.push(localpreneurReview);
+  localpreneurReview.author = req.user._id;
   await localpreneurReview.save();
+  const localpreneur = await Localpreneur.findById(localpreneur_id);
+  localpreneur.reviews.push(localpreneurReview);
   await localpreneur.save();
   req.flash('success_msg', 'Successfully add Localpreneur Review!');
-  res.redirect(`/localpreneurs/${req.params.localpreneur_id}`);
+  res.redirect(`/localpreneurs/${localpreneur_id}`);
   // res.send({message: 'success', data: { localpreneurReview }});
 }
 

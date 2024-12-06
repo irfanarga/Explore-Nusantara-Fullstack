@@ -8,13 +8,15 @@ module.exports.index = async (req, res) => {
 }
 
 module.exports.store = async (req, res) => {
+  const { destination_id} = req.params;
   const review = new Review(req.body.review);
-  const destination = await Destination.findById(req.params.destination_id);
-  destination.reviews.push(review);
+  review.author = req.user._id;
   await review.save();
+  const destination = await Destination.findById(destination_id);
+  destination.reviews.push(review);
   await destination.save();
   req.flash('success_msg', 'Successfully add review!');
-  res.redirect(`/destinations/${req.params.destination_id}`);
+  res.redirect(`/destinations/${destination_id}`);
   // res.send({message: 'success', data: { review }});
 }
 

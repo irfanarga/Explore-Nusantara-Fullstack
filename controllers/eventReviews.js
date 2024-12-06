@@ -8,13 +8,15 @@ module.exports.index = async (req, res) => {
 }
 
 module.exports.store = async (req, res) => {
+  const { event_id } = req.params;
   const eventReview = new EventReview(req.body.eventReview);
-  const event = await Event.findById(req.params.event_id);
-  event.reviews.push(eventReview);
+  eventReview.author = req.user._id;
   await eventReview.save();
+  const event = await Event.findById(event_id);
+  event.reviews.push(eventReview);
   await event.save();
   req.flash('success_msg', 'Successfully add Event Review!');
-  res.redirect(`/events/${req.params.event_id}`);
+  res.redirect(`/events/${event_id}`);
   // res.send({message: 'success', data: { eventReview }});
 }
 

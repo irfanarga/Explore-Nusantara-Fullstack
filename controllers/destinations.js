@@ -24,7 +24,14 @@ module.exports.store = async (req, res, next) => {
 
 module.exports.show = async (req, res) => {
   const { id } = req.params;
-  const destination = await Destination.findById(id).populate('reviews').populate('author');
+  const destination = await Destination.findById(id)
+    .populate({
+      path: 'reviews',
+      populate: {
+        path: 'author'
+      }
+    })
+    .populate('author');
   res.render('destinations/show', { destination });
   // res.status(200).json({message: 'success', data: { destination }});
 }
